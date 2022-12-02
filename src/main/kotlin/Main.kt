@@ -1,4 +1,5 @@
 import days.Day1
+import days.Day2
 
 fun readFile(fileName: String): List<String>? = object {}.javaClass.getResourceAsStream(fileName)
     ?.bufferedReader()
@@ -44,6 +45,7 @@ fun main(args: Array<String>) {
 
     when (day) {
         1 -> runDay(Day1())
+        2 -> runDay(Day2())
         else -> throw NotImplementedError("Day not implemented")
     }
 }
