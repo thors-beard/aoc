@@ -2,12 +2,12 @@ package days
 
 import Day
 
-class Day2 : Day {
+class Day2 : Day<Int> {
     override fun day(): Int {
         return 2
     }
 
-    override fun expected(): Day.Expect {
+    override fun expected(): Day.Expect<Int> {
         return Day.Expect(15, 12)
     }
 
@@ -28,18 +28,21 @@ class Day2 : Day {
                 "Z" -> -1
                 else -> 0
             }
+
             "B" -> when (counter) {
                 "X" -> -1
                 "Y" -> 0
                 "Z" -> 1
                 else -> 0
             }
+
             "C" -> when (counter) {
                 "X" -> 1
                 "Y" -> -1
                 "Z" -> 0
                 else -> 0
             }
+
             else -> 0
         }
     }
@@ -70,18 +73,21 @@ class Day2 : Day {
                 "Z" -> "B" // Win
                 else -> ""
             }
+
             "B" -> when (result) { // Paper
                 "X" -> "A"
                 "Y" -> "B"
                 "Z" -> "C"
                 else -> ""
             }
+
             "C" -> when (result) { // Scissor
                 "X" -> "B"
                 "Y" -> "C"
                 "Z" -> "A"
                 else -> ""
             }
+
             else -> ""
         }
     }

@@ -3,23 +3,23 @@ package days
 import Day
 import java.util.HashSet
 
-class Day3 : Day {
+class Day3 : Day<Int> {
     override fun day(): Int {
         return 3
     }
 
-    override fun expected(): Day.Expect {
+    override fun expected(): Day.Expect<Int> {
         return Day.Expect(157, 70)
     }
 
     fun prio(collection: Collection<Char>): Int {
         return collection.sumOf { c ->
-                if (c.isUpperCase()) {
-                    c.code - 'A'.code + 27
-                } else {
-                    c.code - 'a'.code + 1
-                }
+            if (c.isUpperCase()) {
+                c.code - 'A'.code + 27
+            } else {
+                c.code - 'a'.code + 1
             }
+        }
     }
 
     override fun solve1(lines: List<String>): Int {
@@ -39,15 +39,19 @@ class Day3 : Day {
     override fun solve2(lines: List<String>): Int {
         var total = 0
         for (chunk in lines.chunked(3)) {
-            val uniques = Array(3){ HashSet<Char>()}
-            chunk.forEachIndexed{ index, line -> line.forEach{ c ->
-                uniques[index].add(c)
-            } }
+            val uniques = Array(3) { HashSet<Char>() }
+            chunk.forEachIndexed { index, line ->
+                line.forEach { c ->
+                    uniques[index].add(c)
+                }
+            }
             val parts = HashMap<Char, Int>()
-            uniques.forEach{ unique -> unique.forEach{ c ->
-                val count = parts.getOrPut(c) { 0 }
-                parts[c] = count + 1
-            } }
+            uniques.forEach { unique ->
+                unique.forEach { c ->
+                    val count = parts.getOrPut(c) { 0 }
+                    parts[c] = count + 1
+                }
+            }
             val oneOf = parts.filter { entry -> entry.value == 3 }.keys
             total += prio(oneOf)
         }

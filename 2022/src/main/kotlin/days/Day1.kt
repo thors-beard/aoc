@@ -2,13 +2,13 @@ package days
 
 import Day
 
-class Day1 : Day {
+class Day1 : Day<Int> {
 
     override fun day(): Int {
         return 1
     }
 
-    override fun expected(): Day.Expect {
+    override fun expected(): Day.Expect<Int> {
         return Day.Expect(24000, 45000)
     }
 

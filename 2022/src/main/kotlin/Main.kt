@@ -1,7 +1,4 @@
-import days.Day1
-import days.Day2
-import days.Day3
-import days.Day4
+import days.*
 
 fun readFile(fileName: String): List<String>? = object {}.javaClass.getResourceAsStream(fileName)
     ?.bufferedReader()
@@ -12,7 +9,7 @@ fun read(part: String, day: Int): List<String> {
 }
 
 
-fun runDay(day: Day) {
+fun <T> runDay(day: Day<T>) {
     var result = day.solve1(read("test", day.day()))
     if (result != day.expected().part1) {
         println("Failed part 1 test run. Got '$result', should be '${day.expected().part1}'.")
@@ -23,7 +20,7 @@ fun runDay(day: Day) {
     result = day.solve1(read("input", day.day()))
     println("Answer to part 1: $result")
 
-    if (0 == day.expected().part2) {
+    if (0 == day.expected().part2 || "" == day.expected().part2) {
         return
     }
     result = day.solve2(read("test", day.day()))
@@ -50,6 +47,7 @@ fun main(args: Array<String>) {
         2 -> runDay(Day2())
         3 -> runDay(Day3())
         4 -> runDay(Day4())
+        5 -> runDay(Day5())
         else -> throw NotImplementedError("Day not implemented")
     }
 }

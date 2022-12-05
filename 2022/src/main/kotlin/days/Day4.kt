@@ -3,12 +3,12 @@ package days
 import Day
 import java.util.HashSet
 
-class Day4 : Day {
+class Day4 : Day<Int> {
     override fun day(): Int {
         return 4
     }
 
-    override fun expected(): Day.Expect {
+    override fun expected(): Day.Expect<Int> {
         return Day.Expect(2, 4)
     }
 
@@ -47,11 +47,13 @@ class Day4 : Day {
             val first = getBoundary(pairs[0])
             val second = getBoundary(pairs[1])
             total += if (isBetween(first.first, second) || isBetween(first.second, second) ||
-                isBetween(second.first, first) || isBetween(second.second, first)) {
+                isBetween(second.first, first) || isBetween(second.second, first)
+            ) {
                 1
             } else {
                 0
             }
         }
-        return total}
+        return total
+    }
 }
