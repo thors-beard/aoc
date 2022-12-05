@@ -13,6 +13,10 @@ class Day5 : Day<String> {
     }
 
     override fun solve1(lines: List<String>): String {
+        return solve(lines, false)
+    }
+
+    private fun solve(lines: List<String>, keepOrder: Boolean): String {
         val split = lines.indexOf("")
         val board = createBoard(lines.slice(0 until split))
         val moves = lines.slice(split + 1 until lines.size)
@@ -21,9 +25,11 @@ class Day5 : Day<String> {
             val count = parts[1].toInt()
             val from = parts[3].toInt() - 1
             val to = parts[5].toInt() - 1
+            val removed = mutableListOf<Char>()
             IntRange(0, count - 1).forEach{ _ ->
-                board[to].add(board[from].removeLast())
+                removed.add(board[from].removeLast())
             }
+            board[to].addAll(if (keepOrder) removed.reversed() else removed)
         }
         return board.filter { b -> !b.isEmpty() }.map { b -> b.removeLast() }.joinToString("")
     }
@@ -46,20 +52,6 @@ class Day5 : Day<String> {
     }
 
     override fun solve2(lines: List<String>): String {
-        val split = lines.indexOf("")
-        val board = createBoard(lines.slice(0 until split))
-        val moves = lines.slice(split + 1 until lines.size)
-        for (move in moves) {
-            val parts = move.split(" ")
-            val count = parts[1].toInt()
-            val from = parts[3].toInt() - 1
-            val to = parts[5].toInt() - 1
-            val removed = mutableListOf<Char>()
-            IntRange(0, count - 1).forEach{ _ ->
-                removed.add(board[from].removeLast())
-            }
-            board[to].addAll(removed.reversed())
-        }
-        return board.filter { b -> !b.isEmpty() }.map { b -> b.removeLast() }.joinToString("")
+        return solve(lines, true)
     }
 }
