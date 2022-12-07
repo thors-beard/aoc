@@ -49,6 +49,7 @@ fun main(args: Array<String>) {
         4 -> runDay(Day4())
         5 -> runDay(Day5())
         6 -> runDay(Day6())
+        7 -> runDay(Day7())
         else -> throw NotImplementedError("Day not implemented")
     }
 }
