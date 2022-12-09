@@ -129,7 +129,6 @@ class Day8 : Day<Int> {
                 val score = north * south * east * west
                 max = max(max, score)
             }
-            println()
         }
         return max
     }
